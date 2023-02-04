@@ -12,6 +12,20 @@ export class ProductListComponent implements OnInit {
   imageMargin: number = 1;
   // listfilter: string = 'Cart';
   showImage: boolean = true;
+
+  private _listfilter: string = '';
+
+  get listfilter(): string {
+    return this._listfilter;
+  }
+
+  set listfilter(value: string) {
+    this._listfilter = value;
+    this.filteredProducts = this.performfilter(value);
+    console.log('In Setter', value);
+  }
+
+  filteredProducts: Iproducts[] = [];
   products: Iproducts[] = [
     {
       productId: 1,
@@ -75,22 +89,13 @@ export class ProductListComponent implements OnInit {
     this.showImage = !this.showImage;
   }
 
-  private _listfilter: string = '';
-
-  get listfilter(): string {
-    return this._listfilter;
-  }
-
-  set listfilter(value: string) {
-    this._listfilter = value;
-    console.log('In Setter', value);
-  }
-
   performfilter(filterBy: string): Iproducts[] {
     filterBy = filterBy.toLocaleLowerCase();
     return this.products.filter((product: Iproducts) =>
       product.productName.toLocaleLowerCase().includes(filterBy)
     );
+
+    console.log(this.filteredProducts);
   }
 
   ngOnInit(): void {
