@@ -1,4 +1,10 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-star',
@@ -6,7 +12,7 @@ import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
   styleUrls: ['./star.component.css'],
 })
 export class StarComponent implements OnInit, OnChanges {
-  rating: number = 4;
+  @Input() rating: number = 0;
   cropWidth: number = 75;
 
   constructor() {}
