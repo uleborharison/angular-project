@@ -1,8 +1,10 @@
 import {
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 
@@ -14,11 +16,15 @@ import {
 export class StarComponent implements OnInit, OnChanges {
   @Input() rating: number = 0;
   cropWidth: number = 75;
+  @Output() ratingClicked: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {}
   ngOnChanges(): void {
     this.cropWidth = (this.rating * 75) / 5;
   }
 
+  onClick(): void {
+    this.ratingClicked.emit(`The rating ${this.rating} was clicked!`);
+  }
   ngOnInit(): void {}
 }
